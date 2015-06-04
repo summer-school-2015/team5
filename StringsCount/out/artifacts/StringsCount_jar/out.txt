@@ -1,0 +1,3 @@
+Count of strings:2
+Count of words:3
+Count of chars:8

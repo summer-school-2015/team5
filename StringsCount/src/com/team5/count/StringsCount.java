@@ -8,22 +8,27 @@ class StringsCount {
     static int wrdCounter = 0;
 
     public static void main(String[] args) {
-        if (args[0].contains("if=")) {
-            String fileName = args[0].substring(3);
-            readFile(fileName);
-        } else {
-            readConsole();
-            if (args[0].contains("of=")) {
+        if (args.length > 0) {
+            if (args[0].contains("if=")) {
                 String fileName = args[0].substring(3);
-                writeFile(fileName);
+                readFile(fileName);
+            } else {
+                readConsole();
+                if (args[0].contains("of=")) {
+                    String fileName = args[0].substring(3);
+                    writeFile(fileName);
+                }
             }
-        }
-        if (args.length > 1) {
-            if (args[1].contains("of=")) {
-                String fileName = args[1].substring(3);
-                writeFile(fileName);
+            if (args.length > 1) {
+                if (args[1].contains("of=")) {
+                    String fileName = args[1].substring(3);
+                    writeFile(fileName);
+                }
+            } else {
+                writeConsole();
             }
-        } else {
+        }else{
+            readConsole();
             writeConsole();
         }
     }

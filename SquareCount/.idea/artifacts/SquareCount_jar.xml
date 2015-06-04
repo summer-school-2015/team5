@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SquareCount:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SquareCount_jar</output-path>
+    <root id="archive" name="SquareCount.jar">
+      <element id="module-output" name="SquareCount" />
+    </root>
+  </artifact>
+</component>
