@@ -1,0 +1,3 @@
+Count of strings:4
+Count of words:7
+Count of chars:44
