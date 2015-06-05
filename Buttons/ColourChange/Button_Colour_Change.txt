@@ -1,0 +1,63 @@
+package com.example.Button_Colour_Change;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+import android.widget.Button;
+
+public class MyActivity extends Activity implements View.OnClickListener {
+    int b1 = 0, b2 = 0, b3 = 0; // bk — количество нажатий на кнопку с номером k
+    int prost = 0; // prost — количество найденных простых чисел
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        Button button1 = (Button) findViewById(R.id.button1);
+        button1.setOnClickListener(this);
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(this);
+        Button button3 = (Button) findViewById(R.id.button3);
+        button3.setOnClickListener(this);
+        TextView textView = (TextView) findViewById(R.id.textView);
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.button1) {
+            b1++;
+            button1.setText("" + b1);
+        }
+        if (v.getId() == R.id.button2) {
+            b2++;
+            button2.setText("" + b2);
+        }
+        if (v.getId() == R.id.button3) {
+            b3++;
+            button3.setText("" + b3);
+        }
+        if (simpleNumber(b1 + b2 + b3)) {
+            button1.setBackgroundColor(Color.BLUE);
+            button2.setBackgroundColor(Color.BLUE);
+            button3.setBackgroundColor(Color.BLUE);
+            prost++;
+            textView.setText("Количество найденных простых чисел: " + prost);
+        } else {
+            button1.setBackgroundColor(Color.GREEN);
+            button2.setBackgroundColor(Color.GREEN);
+            button3.setBackgroundColor(Color.GREEN);
+        }
+    }
+
+    private boolean simpleNumber(int clicksCount) {
+        int k = Math.ceil(Math.sqrt(clicksCount));
+        int i = 2;
+        boolean simple = true;
+        while (i < k && simple == true) {
+            if (clicksCount % i == 0) {
+                simple = false
+            }
+        }
+        return simple;
+    }
+}

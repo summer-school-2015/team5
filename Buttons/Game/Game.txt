@@ -1,0 +1,85 @@
+package com.example.Game;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+import android.widget.Button;
+
+public class MyActivity extends Activity implements View.OnClickListener {
+	Button gameArea[][]=new Button[4][4];
+	int gameWork[][]=new int[6][6];
+	TextView congratulations = new TextView;
+	boolean crossToMove=true;
+	gameArea[0][0]= (Button) findViewById(R.id.button00);
+	boolean victory=false;
+	String victoryText;
+
+	public void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.main);
+	Button gameArea[0][0]=(Button) findViewById(R.id.button00);
+	for(int i=1;i<=4;i++){
+		for(int j=1;j<=4;j++){
+			Button gameArea[i][j]=(Button) findViewById(R.id.button00+(i-1)*4+j);
+		}
+	}
+	clean();
+        TextView congratulations = (TextView) findViewById(R.id.congratulations);
+	}
+
+	public void onClick(View v) {
+	if(!victory){
+		for(int i=0;i<=15;i++){
+ 		       	if (v.getId() == R.id.button00+i) {
+				movement(int(i/4)+1,i%4);
+				conditionsOfVictory();
+  		      	}     
+		}   
+    	}else{
+	congratulations.setText("ita pobeda " + victoryText);
+	}
+
+	private void conditionsOfVictory(){
+	for(int x=1;x<=4&&!victory;x++){
+		for(int y=1;y<=4&&!victory;y++){
+			if(gameWork[x][y]!=0){
+				if((gameWork[x][y]==gameWork[x-1][y+1])&&(gameWork[x][y]==gameWork[x+1][y-1])) {victory=true;}
+				if((gameWork[x][y]==gameWork[x-1][y])&&(gameWork[x][y]==gameWork[x+1][y])) {victory=true;}
+				if((gameWork[x][y]==gameWork[x-1][y-1])&&(gameWork[x][y]==gameWork[x+1][y+1])) {victory=true;}
+				if((gameWork[x][y]==gameWork[x][y-1])&&(gameWork[x][y]==gameWork[x][y+1])) {victory=true;}
+			}
+		}
+	}
+	}
+
+	private void movement(int x,int y){
+	if (gameWork[x+1][y+1] == 0){	
+		if(crossToMove){
+			victoryText = "x"; 
+			gameWork[x+1][y+1]=1;
+			gameArea[x][y].setText("x");
+		}
+		else{ 
+			victoryText = "o"; 
+			gameWork[x+1][y+1]=2;
+			gameArea[x][y].setText("o");
+		}	
+		crossToMove=!crossToMove;		
+	}   
+	} 
+ 
+	private void clean(){
+	for(int i=0;i<=5;i++){
+		for(int j=0;j<=5;j++){
+			gameWork[i][j]=0;	
+		}
+	}
+	for(int i=0;i<=3;i++){
+		for(int j=0;j<=3;j++){
+			gameArea[i][j].setText="";	
+		}
+	}	
+        }        
+}
